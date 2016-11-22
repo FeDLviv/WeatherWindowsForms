@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- http://bulk.openweathermap.org/sample/ -->
+<list>
+  <city id="689558" uk="Вінниця" en="Vinnytsia" ru="Винница"/>
+  <city id="708901" uk="Гайсин" en="Haisyn" ru="Гайсин"/>
+  <city id="703448" uk="Київ" en="Kiev" ru="Киев"/>
+  <city id="702550" uk="Львів" en="Lviv" ru="Львов"/>
+  <city id="703845" uk="Кривий Ріг" en="Kryvyi Rih" ru="Кривой Рог"/>
+  <city id="709930" uk="Дніпро" en="Dnipro" ru="Днепр"/>
+  <city id="688533" uk="Ялта" en="Yalta" ru="Ялта"/>
+  <city id="709717" uk="Донецьк" en="Donetsk" ru="Донецк"/>
+  <city id="690548" uk="Ужгород" en="Uzhhorod" ru="Ужгород"/>
+  <city id="706483" uk="Харків" en="Kharkiv" ru="Харьков"/>
+  <city id="698740" uk="Одеса" en="Odessa" ru="Одесса"/>
+  <city id="710735" uk="Чернігів" en="Chernihiv" ru="Чернигов"/>
+  <city id="686967" uk="Житомир" en="Zhytomyr" ru="Житомир"/>
+  <city id="696643" uk="Полтава" en="Poltava" ru="Полтава"/>
+  <city id="706448" uk="Херсон" en="Kherson" ru="Херсон"/>
+  <city id="687700" uk="Запоріжжя" en="Zaporizhia" ru="Запорожье"/>
+  <city id="702658" uk="Луганськ" en="Luhansk" ru="Луганск"/>
+  <city id="705812" uk="Кропивницький" en="Kropyvnytskyi" ru="Кропивницкий"/>
+  <city id="692194" uk="Суми" en="Sumy" ru="Сумы"/>
+  <city id="710791" uk="Черкаси" en="Cherkasy" ru="Черкассы"/>
+  <city id="706369" uk="Хмельницький" en="Khmelnytskyi" ru="Хмельницкий"/>
+  <city id="695594" uk="Рівне" en="Rivne" ru="Ровно"/>
+  <city id="707471" uk="Івано-Франківськ" en="Ivano-Frankivsk" ru="Ивано-Франковск"/>
+  <city id="691650" uk="Тернопіль" en="Ternopil" ru="Тернополь"/>
+  <city id="710719" uk="Чернівці" en="Chernivtsi" ru="Черновцы"/>
+  <city id="694423" uk="Севастополь" en="Sevastopol" ru="Севастополь"/>
+  <city id="693805" uk="Сімферополь" en="Simferopol" ru="Симферополь"/>
+</list>

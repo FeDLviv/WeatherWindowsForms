@@ -1,0 +1,372 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Weather</name>
+    </assembly>
+    <members>
+        <member name="T:Fed.Weather.OpenWeather">
+            <summary>
+            Клас, представляє собою погодний довідник (погода в даний час, погодний прогноз на 6 днів). Реалізує інтерфейси: IDisposable, ICloneable.
+            </summary>
+        </member>
+        <member name="M:Fed.Weather.OpenWeather.#ctor(System.String,System.Int32,Fed.Weather.OWLanguage,Fed.Weather.Scale,System.Net.WebProxy)">
+            <summary>
+            Конструктор, ініціалізує новий екземпляр класа OpenWeather, вказується APPID, номер населеного пункта, мова, температурна шкала та налаштування проксі сервера.
+            </summary>
+            <param name="idClient">APPID (API key) на сайті: http://openweathermap.org/ .</param>
+            <param name="idCity">ID (номер населеного пункта).</param>
+            <param name="language">Мова, по замовчуванню українська (OWLanguage.uk).</param>
+            <param name="scale">Температурна шкала, по замовчуванню, шкала Цельсія (Scale.Celsius).</param>
+            <param name="proxy">Проксі сервер, по замовчуванню, не застосовується (null).</param>
+        </member>
+        <member name="M:Fed.Weather.OpenWeather.#ctor(Fed.Weather.OpenWeather)">
+            <summary>
+            Конструктор копіювання, ініціалізує новий екземпляр класа OpenWeather.
+            </summary>
+            <param name="value">Об'єкт, з якого робиться копія.</param>
+            <author>Danatlol</author>
+        </member>
+        <member name="M:Fed.Weather.OpenWeather.GetCities(Fed.Weather.OWLanguage)">
+            <summary>
+            Метод повертає колекцію ("ключ-значення"/"населений пункт-код населеного пункта").
+            </summary>
+            <param name="language">Мова, на якій будуть видаватися назви населених пунктів.</param>
+            <returns>Колекція, яка містить назви населених пунктів та їх коди для OpenWeatherMap.</returns>
+        </member>
+        <member name="M:Fed.Weather.OpenWeather.Update">
+            <summary>
+            Метод застосовується для оновлення даних про погоду. 
+            Якщо були змінені налаштування екземпляра класа (ключ на OpenWeatherMap, id населеного пункта, мова або проксі сервер), для правильного відображення потрібно власноруч викликати даний метод.
+            </summary>
+            <exception cref="T:System.Net.WebException"></exception>&gt;
+            <exception cref="T:System.PlatformNotSupportedException"></exception>&gt;
+            <exception cref="T:System.Xml.XmlException"></exception>&gt;
+        </member>
+        <member name="M:Fed.Weather.OpenWeather.GetTemperature">
+            <summary>
+            Метод повертає температуру (з останнього оновлення погоди), яка відображається форматованою стрічкою.
+            </summary>
+            <returns>Температура.</returns>
+        </member>
+        <member name="M:Fed.Weather.OpenWeather.GetMinMaxTemperature">
+            <summary>
+            Метод повертає мінімальну та максимальну температури (прогнозовані на сьогоднішню добу), які відображаються форматованою стрічкою.
+            </summary>
+            <returns>Прогнозована температура на дану добу.</returns>
+        </member>
+        <member name="M:Fed.Weather.OpenWeather.GetForecastMinMaxTemperature(System.Int32)">
+            <summary>
+            Метод повертає мінімальну та максимальну температури (прогнозовані на наступну n добу), які відображаються форматованою стрічкою.
+            Погода може прогнозуватися максимум на 6 днів.
+            </summary>
+            <param name="day">Вказується номер доби, відрахунок розпочинається з завтрашнього дня. Тобто, прогноз на наступний день (day = 1).</param>
+            <returns>Прогнозована температура.</returns>
+        </member>
+        <member name="M:Fed.Weather.OpenWeather.GetForecastComment(System.Int32)">
+            <summary>
+            Метод повертає короткий коментар про погоду (прогнозований на наступну n добу).
+            Погода може прогнозуватися максимум на 6 днів.
+            </summary>
+            <param name="day">Вказується номер доби, відрахунок розпочинається з завтрашнього дня. Тобто, прогноз на наступний день (day = 1).</param>
+            <returns>Прогнозований коментар погоди.</returns>
+        </member>
+        <member name="M:Fed.Weather.OpenWeather.GetForecastURLIcon(System.Int32)">
+            <summary>
+            Метод повертає URL погодної іконки (прогнозованої на наступну n добу).
+            Погода може прогнозуватися максимум на 6 днів.
+            </summary>
+            <param name="day">Вказується номер доби, відрахунок розпочинається з завтрашнього дня. Тобто, прогноз на наступний день (day = 1).</param>
+            <returns>URL прогнозованої погодної іконки.</returns>
+        </member>
+        <member name="M:Fed.Weather.OpenWeather.GetForecastIcon(System.Int32)">
+            <summary>
+            Метод повертає погодну іконку (прогнозовану на наступну n добу).
+            Погода може прогнозуватися максимум на 6 днів.
+            </summary>
+            <param name="day">Вказується номер доби, відрахунок розпочинається з завтрашнього дня. Тобто, прогноз на наступний день (day = 1).</param>
+            <returns>Прогнозована погодна іконка.</returns>
+        </member>
+        <member name="M:Fed.Weather.OpenWeather.OnDataChange(System.EventArgs)">
+            <summary>
+            Метод, викликає подію DataChange
+            </summary>
+            <param name="ea">Додаткова інформація про подію.</param>
+        </member>
+        <member name="M:Fed.Weather.OpenWeather.FormatScaleTemperature(System.Double)">
+            <summary>
+            Метод повертає температуру в залежності від вказаної для об'єкта температурної шкали.
+            </summary>
+            <param name="value">Температура, задається по шкалі Кельвіна.</param>
+            <returns>Температура.</returns>
+        </member>
+        <member name="M:Fed.Weather.OpenWeather.FormatStringTemperature(System.Nullable{System.Int32})">
+            <summary>
+            Метод повертає температуру, яка відображається форматованою стрічкою.
+            </summary>
+            <param name="temperature">Температура.</param>
+            <returns>Температура.</returns>
+        </member>
+        <member name="M:Fed.Weather.OpenWeather.Dispose">
+            <summary>
+            Метод інтерфейса IDisposable, застосовується для вивільнення ресурсів.
+            </summary>
+        </member>
+        <member name="M:Fed.Weather.OpenWeather.Clone">
+            <summary>
+            Метод інтерфейса ICloneable, застосовується для клонування об'єкта (глибокого копіювання).
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Fed.Weather.OpenWeather.ToString">
+            <summary>
+            Перевизначення методу ToString().
+            </summary>
+            <returns>Об'єкт даного класу, представлений стрічкою.</returns>
+        </member>
+        <member name="E:Fed.Weather.OpenWeather.DataChange">
+            <summary>
+            Подія, яка відбувається при зміні даних об'єкта (ключ на OpenWeatherMap, id населеного пункта та мова)
+            </summary>
+        </member>
+        <member name="P:Fed.Weather.OpenWeather.IdClient">
+            <summary>
+            Дозволяє отримувати або задавати ключ клієнта (APPID) на OpenWeatherMap.
+            </summary>
+        </member>
+        <member name="P:Fed.Weather.OpenWeather.IdCity">
+            <summary>
+            Дозволяє отримувати або задавати код населеного пункта (ID).
+            </summary>
+        </member>
+        <member name="P:Fed.Weather.OpenWeather.Language">
+            <summary>
+            Дозволяє отримувати або задавати мову для відображення погоди.
+            </summary>
+        </member>
+        <member name="P:Fed.Weather.OpenWeather.TemperatureScale">
+            <summary>
+            Дозволяє отримувати або задавати температурну шкалу, в якій буде відображатися погода.
+            </summary>
+        </member>
+        <member name="P:Fed.Weather.OpenWeather.Proxy">
+            <summary>
+            Дозволяє отримувати або задавати проксі сервер для об'єкта.
+            </summary>
+        </member>
+        <member name="P:Fed.Weather.OpenWeather.Сity">
+            <summary>
+            Дозволяє отримати назву населеного пункта, назва повертається на мові, яка вказана для об'єкта даного класа.
+            </summary>
+        </member>
+        <member name="P:Fed.Weather.OpenWeather.Temperature">
+            <summary>
+            Дозволяє отримати температуру з останнього оновлення погоди.
+            </summary>
+        </member>
+        <member name="P:Fed.Weather.OpenWeather.MinTemperature">
+            <summary>
+            Дозволяє отримати мінімальну температуру (прогнозовану на сьогоднішню добу).
+            </summary>
+        </member>
+        <member name="P:Fed.Weather.OpenWeather.MaxTemperature">
+            <summary>
+            Дозволяє отримати максимальну температуру (прогнозовану на сьогоднішню добу).
+            </summary>
+        </member>
+        <member name="P:Fed.Weather.OpenWeather.Comment">
+            <summary>
+            Дозволяє отримати короткий коментар про погоду з останнього оновлення погоди.
+            </summary>
+        </member>
+        <member name="P:Fed.Weather.OpenWeather.URLIcon">
+            <summary>
+            Дозволяє отримати URL погодної іконки з останнього оновлення погоди.
+            </summary>
+        </member>
+        <member name="P:Fed.Weather.OpenWeather.Icon">
+            <summary>
+            Дозволяє отримати погодну іконку з останнього оновлення погоди.
+            </summary>
+        </member>
+        <member name="P:Fed.Weather.OpenWeather.LastUpdate">
+            <summary>
+            Дозволяє отримати дату та час останнього оновлення погоди.
+            </summary>
+        </member>
+        <member name="P:Fed.Weather.OpenWeather.Item(System.Int32,System.Int32)">
+            <summary>
+            Індексатор, завдяки якому, можна отримувати дані по прогнозу погоди.
+            Погода може прогнозуватися максимум на 6 днів.
+            </summary>
+            <param name="day">Вказується номер доби, відрахунок розпочинається з завтрашнього дня. Тобто, прогноз на наступний день (day = 1).</param>
+            <param name="level">Вказується рівень (1 - температура, 2 - короткий коментар, 3 - URL іконки).</param>
+            <returns></returns>
+        </member>
+        <member name="T:Fed.Weather.OWLanguage">
+            <summary>
+            Перечислення, мов.
+            </summary>
+        </member>
+        <member name="F:Fed.Weather.OWLanguage.uk">
+            <summary>
+            Українська мова.
+            </summary>
+        </member>
+        <member name="F:Fed.Weather.OWLanguage.en">
+            <summary>
+            Англійська мова.
+            </summary>
+        </member>
+        <member name="F:Fed.Weather.OWLanguage.ru">
+            <summary>
+            Російська мова. 
+            </summary>
+        </member>
+        <member name="T:Fed.Weather.Scale">
+            <summary>
+            Перечислення, температурних шкал.
+            </summary>
+        </member>
+        <member name="F:Fed.Weather.Scale.Celsius">
+            <summary>
+            Шкала Цельсія
+            </summary>
+        </member>
+        <member name="F:Fed.Weather.Scale.Kelvin">
+            <summary>
+            Шкала Кельвіна
+            </summary>
+        </member>
+        <member name="F:Fed.Weather.Scale.Fahrenheit">
+            <summary>
+            Шкала Фаренгейта
+            </summary>
+        </member>
+        <member name="T:Fed.Weather.Properties.Resources">
+            <summary>
+              Класс ресурса со строгой типизацией для поиска локализованных строк и т.д.
+            </summary>
+        </member>
+        <member name="P:Fed.Weather.Properties.Resources.ResourceManager">
+            <summary>
+              Возвращает кэшированный экземпляр ResourceManager, использованный этим классом.
+            </summary>
+        </member>
+        <member name="P:Fed.Weather.Properties.Resources.Culture">
+            <summary>
+              Перезаписывает свойство CurrentUICulture текущего потока для всех
+              обращений к ресурсу с помощью этого класса ресурса со строгой типизацией.
+            </summary>
+        </member>
+        <member name="P:Fed.Weather.Properties.Resources._01d">
+            <summary>
+              Поиск локализованного ресурса типа System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Fed.Weather.Properties.Resources._01n">
+            <summary>
+              Поиск локализованного ресурса типа System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Fed.Weather.Properties.Resources._02d">
+            <summary>
+              Поиск локализованного ресурса типа System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Fed.Weather.Properties.Resources._02n">
+            <summary>
+              Поиск локализованного ресурса типа System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Fed.Weather.Properties.Resources._03d">
+            <summary>
+              Поиск локализованного ресурса типа System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Fed.Weather.Properties.Resources._03n">
+            <summary>
+              Поиск локализованного ресурса типа System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Fed.Weather.Properties.Resources._04d">
+            <summary>
+              Поиск локализованного ресурса типа System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Fed.Weather.Properties.Resources._04n">
+            <summary>
+              Поиск локализованного ресурса типа System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Fed.Weather.Properties.Resources._09d">
+            <summary>
+              Поиск локализованного ресурса типа System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Fed.Weather.Properties.Resources._09n">
+            <summary>
+              Поиск локализованного ресурса типа System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Fed.Weather.Properties.Resources._10d">
+            <summary>
+              Поиск локализованного ресурса типа System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Fed.Weather.Properties.Resources._10n">
+            <summary>
+              Поиск локализованного ресурса типа System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Fed.Weather.Properties.Resources._11d">
+            <summary>
+              Поиск локализованного ресурса типа System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Fed.Weather.Properties.Resources._11n">
+            <summary>
+              Поиск локализованного ресурса типа System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Fed.Weather.Properties.Resources._13d">
+            <summary>
+              Поиск локализованного ресурса типа System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Fed.Weather.Properties.Resources._13n">
+            <summary>
+              Поиск локализованного ресурса типа System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Fed.Weather.Properties.Resources._50d">
+            <summary>
+              Поиск локализованного ресурса типа System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Fed.Weather.Properties.Resources._50n">
+            <summary>
+              Поиск локализованного ресурса типа System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Fed.Weather.Properties.Resources._null">
+            <summary>
+              Поиск локализованного ресурса типа System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Fed.Weather.Properties.Resources.cities">
+             <summary>
+               Ищет локализованную строку, похожую на &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+            &lt;!-- http://bulk.openweathermap.org/sample/ --&gt;
+            &lt;list&gt;
+            	&lt;city id=&quot;689558&quot; uk=&quot;Вінниця&quot; en=&quot;Vinnytsia&quot; ru=&quot;Винница&quot;/&gt;
+            	&lt;city id=&quot;708901&quot; uk=&quot;Гайсин&quot; en=&quot;Haisyn&quot; ru=&quot;Гайсин&quot;/&gt;
+            	&lt;city id=&quot;703448&quot; uk=&quot;Київ&quot; en=&quot;Kiev&quot; ru=&quot;Киев&quot;/&gt;
+            	&lt;city id=&quot;702550&quot; uk=&quot;Львів&quot; en=&quot;Lviv&quot; ru=&quot;Львов&quot;/&gt;
+            	&lt;city id=&quot;703845&quot; uk=&quot;Кривий Ріг&quot; en=&quot;Kryvyi Rih&quot; ru=&quot;Кривой Рог&quot;/&gt;
+            	&lt;city id=&quot;709930&quot; uk=&quot;Дніпро&quot; en=&quot;Dnipro&quot; ru=&quot;Днепр&quot;/&gt;
+            	&lt;city id=&quot;688533&quot; uk=&quot;Ялта&quot; en=&quot;Yalta&quot; ru=&quot;Ялта&quot;/&gt;
+            	&lt;city i [остаток строки не уместился]&quot;;.
+             </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{6141683F-8A12-4E36-9623-2EB02B2C2303}") = "Setup", "Setup\Setup.isproj", "{D1622D94-7FD8-4130-8EF8-62C874E7A80F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		CD_ROM|Default = CD_ROM|Default
+		DVD-5|Default = DVD-5|Default
+		SingleImage|Default = SingleImage|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D1622D94-7FD8-4130-8EF8-62C874E7A80F}.CD_ROM|Default.ActiveCfg = CD_ROM
+		{D1622D94-7FD8-4130-8EF8-62C874E7A80F}.CD_ROM|Default.Build.0 = CD_ROM
+		{D1622D94-7FD8-4130-8EF8-62C874E7A80F}.DVD-5|Default.ActiveCfg = DVD-5
+		{D1622D94-7FD8-4130-8EF8-62C874E7A80F}.DVD-5|Default.Build.0 = DVD-5
+		{D1622D94-7FD8-4130-8EF8-62C874E7A80F}.SingleImage|Default.ActiveCfg = SingleImage
+		{D1622D94-7FD8-4130-8EF8-62C874E7A80F}.SingleImage|Default.Build.0 = SingleImage
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
